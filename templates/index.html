@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  h2 {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+  }
+
+  form {
+    display: block;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input[type="number"], select {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0 20px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+
+<h2>SBA Loan Default Prediction System (Demo)</h2>
+
+<form method="POST" action="/">
+  <label for="Zip">Zip Code of business location:</label>
+  <input type="number" name="Zip" value="{{ form_data.Zip if form_data else '00000' }}" id="Zip">
+
+  <label for="NAICS">NAICS Code:</label>
+  <input type="number" name="NAICS" value="{{ form_data.NAICS if form_data else '000000' }}" id="NAICS">
+
+  <label for="NewExist">New or Existing business:</label>
+  <select name="NewExist" id="NewExist">
+    <option value="New" {% if form_data and form_data.NewExist == "New" %}selected{% endif %}>New</option>
+    <option value="Existing" {% if form_data and form_data.NewExist == "Existing" %}selected{% endif %}>Exist</option>
+  </select>
+
+  <label for="NoEmp">Number of employee:</label>
+  <input type="number" name="NoEmp" value="{{ form_data.NoEmp if form_data else '00000' }}" id="NoEmp">
+
+  <label for="CreateJob">Create any new jobs:</label>
+  <select name="CreateJob" id="CreateJob">
+    <option value="Yes" {% if form_data and form_data.CreateJob == "Yes" %}selected{% endif %}>Yes</option>
+    <option value="No" {% if form_data and form_data.CreateJob == "No" %}selected{% endif %}>No</option>
+  </select>
+
+  <label for="Franchise">Is this a franchise?:</label>
+  <select name="Franchise" id="Franchise">
+    <option value="Yes" {% if form_data and form_data.Franchise == "Yes" %}selected{% endif %}>Yes</option>
+    <option value="No" {% if form_data and form_data.Franchise == "No" %}selected{% endif %}>No</option>
+  </select>
+
+  <label for="UrbanRural">Is this Urban or Rural business?:</label>
+  <select name="UrbanRural" id="UrbanRural">
+    <option value="Urban" {% if form_data and form_data.UrbanRural == "Urban" %}selected{% endif %}>Urban</option>
+    <option value="Rural" {% if form_data and form_data.UrbanRural == "Rural" %}selected{% endif %}>Rural</option>
+    <option value="Not Specified" {% if form_data and form_data.UrbanRural == "Not Specified" %}selected{% endif %}>Not Specified</option>
+  </select>
+
+  <label for="GrAppv">Loan amount (USD):</label>
+  <input type="number" name="GrAppv" value="{{ form_data.GrAppv if form_data else '000000' }}" id="GrAppv">
+
+  <label for="RevLineCr">Is this a revolving line of credit?:</label>
+  <select name="RevLineCr" id="RevLineCr">
+    <option value="Yes" {% if form_data and form_data.RevLineCr == "Yes" %}selected{% endif %}>Yes</option>
+    <option value="No" {% if form_data and form_data.RevLineCr == "No" %}selected{% endif %}>No</option>
+  </select>
+
+  <label for="LowDoc"> Is this a LowDoc Loan Program?:</label>
+  <select name="LowDoc" id="LowDoc">
+    <option value="Yes" {% if form_data and form_data.LowDoc == "Yes" %}selected{% endif %}>Yes</option>
+    <option value="No" {% if form_data and form_data.LowDoc == "No" %}selected{% endif %}>No</option>
+  </select>
+
+  <label for="Term">Loan Term (months):</label>
+  <input type="number" name="Term" value="{{ form_data.Term if form_data else '000' }}" id="Term">
+
+  <input type="submit" value="Submit">
+</form>
+
+{{ result }}
+
+</body>
+</html>
